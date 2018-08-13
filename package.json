@@ -1,0 +1,17 @@
+{
+  "name": "discord-reddit-bot",
+  "version": "0.1.0",
+  "description": "a discod bot that mirrors subreddit top posts on servers",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "bot",
+    "discord",
+    "reddit"
+  ],
+  "author": "Camilo Zambrano & Yesid Bejarano",
+  "license": "MIT"
+}
