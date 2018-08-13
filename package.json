@@ -13,5 +13,9 @@
     "reddit"
   ],
   "author": "Camilo Zambrano & Yesid Bejarano",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3"
+  }
 }

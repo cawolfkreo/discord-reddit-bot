@@ -1,3 +1,9 @@
 "use strict";
 
-console.log("Funciona!");
+/* =============================================
+*                   Imports
+================================================*/
+
+require("dotenv").config();
+require("./imports/webserver");
+
