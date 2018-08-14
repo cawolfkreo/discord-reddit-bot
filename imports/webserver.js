@@ -45,6 +45,9 @@ app.get("/", ( req, res ) => {
 	res.json({ version: packageInfo.version });
 });
 
+/**
+ * web server port configuration.
+ */
 const server = app.listen(PORT, () => {
 	const Host = server.address().address;
 	const Port = server.address().port;

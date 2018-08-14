@@ -13,6 +13,26 @@ if(!RCLID) {
 	process.exit(1);
 }
 
+if(!RCLISECRET) {
+	console.error("Error: No RCLISECRET variable in enviroment.\n Perhaps you forgot to include it?");
+	process.exit(1);
+}
+
+if(!RAGENT) {
+	console.log("Error: No RAGENT variable in enviroment.\n i will use: 'panda' as the reddit agent!");
+	process.exit(1);
+}
+
+if(!RUSER) {
+	console.error("Error: No RUSER variable in enviroment.\n Perhaps you forgot to include it?");
+	process.exit(1);
+}
+
+if(!RPASSWORD){
+	console.error("Error: No RPASSWORD variable in enviroment.\n Perhaps you forgot to include it?");
+	process.exit(1);
+}
+
 /**
  * snoowrap import.
  */
@@ -24,12 +44,12 @@ const snoowrap = require("snoowrap");
 const utilities = require("./utilities");
 
 /**
- * Reddit wrapper made by snoowrap.
+ * Reddit wrapper with snoowrap.
  */
 const reddit = new snoowrap({
 	clientId: RCLID,
 	clientSecret: RCLISECRET,
-	userAgent: RAGENT,
+	userAgent: (RAGENT? RAGENT : "panda"),
 	username: RUSER,
 	password: RPASSWORD
 });
@@ -49,6 +69,9 @@ function getTopPosts(subreddit) {
 	return sub.getTop({time: "hour"});
 }
 
+/**
+ * Log to print when the wrapper is ready.
+ */
 console.log(`[${utilities.dateNow()}] Reddit wrapper ready! :D`);
 
 /* =============================================

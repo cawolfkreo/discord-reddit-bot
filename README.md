@@ -1,2 +1,2 @@
 # discord-reddit-bot
-a discord bot to mirror content from reddit
+This is the code for a Discord bot that can mirror reddit posts on discord servers.
