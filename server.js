@@ -63,6 +63,10 @@ client.on("ready", () => {
 	client.user.setActivity("Reddit", { type: "WATCHING" });
 });
 
+/* =============================================
+*           bot "on events" handlers
+================================================*/
+
 /**
  * Message handler for the bot. At every message the bot recieves, it will use
  * this handler.
@@ -86,6 +90,10 @@ client.on("message", msg => {
 			break;
 		case `${prefix}about`:
 			aboutBot(msg);
+			break;
+		case `${prefix}help`:
+		case `${prefix}h`:
+			helpBot(msg,prefix);
 			break;
 		default:
 			if (IsACommand(cmd, prefix)){
@@ -129,6 +137,27 @@ function aboutBot(msg) {
 }
 
 /**
+ * Sends the help information, wich right now is the bot commands.
+ * @param {Message} message the message to reply with the information
+ * @param {String} prefix Bot prefix command
+ * @author by Camilo Zambrano
+ */
+function helpBot(message, prefix) {
+	let helpMsg = new Discord.RichEmbed()
+		.setTitle("Help:")
+		.setDescription("commands for the bot")
+		.setColor("#3174e0")
+		.setThumbnail(client.user.displayAvatarURL)
+		.addField(`${prefix}ping`, "pong!")
+		.addField(`${prefix}about`, "info about this bot")
+		.addField(`${prefix}help`,"This very message 😜")
+		.addField(`${prefix}reddit`,"still in Beta. Gets last hour top posts from r/me_irl")
+		.footer("The bot wishes you to enjoy using this commands 🤖👍");
+
+	message.channel.send(helpMsg);
+}
+
+/**
  * 
  * @param {Message} msg Message object to the bot
  * @author by Yesid Bejarano
@@ -142,7 +171,8 @@ function redditPost(msg) {
 }
 
 /**
- * 
+ * sends an array of reddit posts with some seconds in between them.
+ * @param {Message} msg msg to get the channel for the message to send
  * @param {Array} posts reddit posts
  * @author by Yesid Bejarano
  */
@@ -168,4 +198,7 @@ function IsACommand (cmd,prefix) {
 	return begin === prefix && cmd.charAt(0) !== " ";
 }
 
+/**
+ * Discord login
+ */
 client.login(DISCORD);
