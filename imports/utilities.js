@@ -1,7 +1,7 @@
 "use strict";
 
 /* =============================
-*            Functions
+*           Functions
 ================================*/
 
 /** This function generates a new date with the current

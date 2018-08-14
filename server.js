@@ -48,19 +48,25 @@ const reddit = require("./imports/reddit");
  * Discord wrapper. 
  */
 const Discord = require("discord.js");
+
 /**
  * Discord client for he bot.
  */
 const client = new Discord.Client();
 
 /**
- * 
+ * When the discord bot is ready, it will print the timestamp and
+ * set the bot activity on discord.
  */
 client.on("ready", () => {
 	console.log(`[${utilities.dateNow()}] bot ready! :D and logged in as: ${client.user.tag}!`);
 	client.user.setActivity("Reddit", { type: "WATCHING" });
 });
 
+/**
+ * Message handler for the bot. At every message the bot recieves, it will use
+ * this handler.
+ */
 client.on("message", msg => {
 	//never interact with bots >:C
 	if (msg.author.bot) return;
@@ -69,17 +75,17 @@ client.on("message", msg => {
 	const cmd = msgArray[0];
 	const args = msgArray.slice(1);
 
-	const command = /^\$\$\w*/gi;
+	const prefix = PREFIX? PREFIX : "!";
 
 	switch (cmd) {
-		case `${PREFIX}ping`:
+		case `${prefix}ping`:
 			ping(msg);
 			break;
-		case `${PREFIX}reddit`:
+		case `${prefix}reddit`:
 			redditPost(msg);
 			break;
 		default:
-			if (command.test(cmd)){
+			if (IsACommand(cmd, prefix)){
 				console.log(`[${utilities.dateNow()}] command not found: ${cmd + args.toString()}`);
 				msg.channel.send("I don't understand that command");
 			}
@@ -126,6 +132,18 @@ function asyncPosts(msg, posts) {
 			asyncPosts(msg, tail);
 		}, time);
 	}
+}
+
+/**
+ * This function tests if a message is a probable command for the bot or not.
+ * @param {String} cmd The message to test if it is command or not
+ * @param {String} prefix The prefix for commands
+ * @author by Camilo Zambrano
+ */
+function IsACommand (cmd,prefix) {
+	const begin = cmd.slice(0,prefix.length);
+
+	return begin === prefix && cmd.charAt(0) !== " ";
 }
 
 client.login(DISCORD);
