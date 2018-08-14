@@ -152,7 +152,7 @@ function helpBot(message, prefix) {
 		.addField(`${prefix}about`, "info about this bot")
 		.addField(`${prefix}help`,"This very message 😜")
 		.addField(`${prefix}reddit`,"still in Beta. Gets last hour top posts from r/me_irl")
-		.footer("The bot wishes you to enjoy using this commands 🤖👍");
+		.setFooter("The bot wishes you to enjoy using this commands 🤖👍");
 
 	message.channel.send(helpMsg);
 }
