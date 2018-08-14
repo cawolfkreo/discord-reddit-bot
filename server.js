@@ -57,7 +57,7 @@ const client = new Discord.Client();
  * 
  */
 client.on("ready", () => {
-	console.log(`[${utilities.dateNow()}] bot ready! :D and logged in as${client.user.tag}!`);
+	console.log(`[${utilities.dateNow()}] bot ready! :D and logged in as: ${client.user.tag}!`);
 	client.user.setActivity("Reddit", { type: "WATCHING" });
 });
 
@@ -65,10 +65,26 @@ client.on("message", msg => {
 	//never interact with bots >:C
 	if (msg.author.bot) return;
 
+	const msgArray = msg.content.split(" ");
+	const cmd = msgArray[0];
+	const args = msgArray.slice(1);
 
-	if (msg.content === `${PREFIX}ping`) ping(msg);
+	const command = /^\$\$\w*/gi;
 
-	if (msg.content === `${PREFIX}reddit`) redditPost(msg);
+	switch (cmd) {
+		case `${PREFIX}ping`:
+			ping(msg);
+			break;
+		case `${PREFIX}reddit`:
+			redditPost(msg);
+			break;
+		default:
+			if (command.test(cmd)){
+				console.log(`[${utilities.dateNow()}] command not found: ${cmd + args.toString()}`);
+				msg.channel.send("I don't understand that command");
+			}
+			break;
+	}
 });
 
 /* =============================================
@@ -91,7 +107,10 @@ function ping(msg) {
  */
 function redditPost(msg) {
 	reddit.getTopPosts("me_irl")
-		.then(res => asyncPosts(msg,res));
+		.then(res => asyncPosts(msg, res))
+		.catch(error => {
+			console.log(`[${utilities.dateNow()}] Error: ${error}`);
+		});
 }
 
 /**
@@ -100,9 +119,9 @@ function redditPost(msg) {
  * @author by Yesid Bejarano
  */
 function asyncPosts(msg, posts) {
-	if(posts.length > 0) {
+	if (posts.length > 0) {
 		msg.channel.send(posts[0].url);
-		setTimeout(() =>{
+		setTimeout(() => {
 			const tail = posts.splice(1);
 			asyncPosts(msg, tail);
 		}, time);
