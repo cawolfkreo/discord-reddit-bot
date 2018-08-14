@@ -84,6 +84,9 @@ client.on("message", msg => {
 		case `${prefix}reddit`:
 			redditPost(msg);
 			break;
+		case `${prefix}about`:
+			aboutBot(msg);
+			break;
 		default:
 			if (IsACommand(cmd, prefix)){
 				console.log(`[${utilities.dateNow()}] command not found: ${cmd + args.toString()}`);
@@ -104,6 +107,25 @@ client.on("message", msg => {
  */
 function ping(msg) {
 	msg.reply("pong");
+}
+
+/**
+ * Replies to a message with basic information about the bot.
+ * @param {Message} msg Message to reply with the bot information
+ * @author by Camilo Zambrano
+ */
+function aboutBot(msg) {
+	let aboutMsg = new Discord.RichEmbed()
+		.setTitle("About:")
+		.setDescription("Information about this bot! 🤖")
+		.setColor("#3174e0")
+		.setThumbnail(client.user.displayAvatarURL)
+		.addField("Name of the bot: ", client.user.username)
+		.addField("Created on: ", client.user.createdAt)
+		.addField("Code: ", "https://github.com/cawolfkreo/discord-reddit-bot")
+		.setFooter("The bot is happy you care about him 🤖👍");
+
+	msg.reply(aboutMsg);
 }
 
 /**
