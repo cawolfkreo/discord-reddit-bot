@@ -73,7 +73,7 @@ client.on("message", msg => {
 
 	const msgArray = msg.content.split(" ");
 	const cmd = msgArray[0];
-	const args = msgArray.slice(1);
+	const args = msgArray[1];
 
 	const prefix = PREFIX? PREFIX : "!";
 
@@ -92,7 +92,7 @@ client.on("message", msg => {
 				helpBot(msg,prefix);
 				break;
 		case `${prefix}reddit2`:
-			redditPostByParameter(msg);
+			redditPostByParameter(msg,args);
 			break;
 		default:
 			if (IsACommand(cmd, prefix)){
@@ -171,12 +171,10 @@ function redditPost(msg) {
 
 /**
  * Get The top posts from the subreddit given
- * @param {Message} msg 
+ * @param {Message} args 
  * @author by Yesid Bejarano
  */
-function redditPostByParameter(msg) {
-	const msgArray = msg.content.split(" ");
-	const args = msgArray[1];
+function redditPostByParameter(msg,args) {
 	reddit.getTopPosts(args)
 		.then(res => asyncPosts(msg, res))
 		.catch(error => {
