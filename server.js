@@ -77,7 +77,7 @@ client.on("message", msg => {
 
 	const msgArray = msg.content.split(" ");
 	const cmd = msgArray[0];
-	const args = msgArray[1];
+	const args = msgArray.slice(1);
 
 	const prefix = PREFIX? PREFIX : "!";
 
@@ -179,7 +179,8 @@ function redditPost(msg) {
  * @author by Yesid Bejarano
  */
 function redditPostByParameter(msg,args) {
-	reddit.getTopPosts(args)
+	let args2 = args[0];
+	reddit.getTopPosts(args2)
 		.then(res => asyncPosts(msg, res))
 		.catch(error => {
 			console.log(`[${utilities.dateNow()}] Error: ${error}`);
