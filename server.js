@@ -93,7 +93,10 @@ client.on("message", msg => {
 			break;
 		case `${prefix}help`:
 		case `${prefix}h`:
-			helpBot(msg,prefix);
+				helpBot(msg,prefix);
+				break;
+		case `${prefix}reddit2`:
+			redditPostByParameter(msg,args);
 			break;
 		default:
 			if (IsACommand(cmd, prefix)){
@@ -164,6 +167,20 @@ function helpBot(message, prefix) {
  */
 function redditPost(msg) {
 	reddit.getTopPosts("me_irl")
+		.then(res => asyncPosts(msg, res))
+		.catch(error => {
+			console.log(`[${utilities.dateNow()}] Error: ${error}`);
+		});
+}
+
+/**
+ * Get The top posts from the subreddit given
+ * @param {Message} args 
+ * @author by Yesid Bejarano
+ */
+function redditPostByParameter(msg,args) {
+	let args2 = args[0];
+	reddit.getTopPosts(args2)
 		.then(res => asyncPosts(msg, res))
 		.catch(error => {
 			console.log(`[${utilities.dateNow()}] Error: ${error}`);
