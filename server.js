@@ -63,6 +63,10 @@ client.on("ready", () => {
 	client.user.setActivity("Reddit", { type: "WATCHING" });
 });
 
+/* =============================================
+*           bot "on events" handlers
+================================================*/
+
 /**
  * Message handler for the bot. At every message the bot recieves, it will use
  * this handler.
@@ -183,7 +187,8 @@ function redditPostByParameter(msg,args) {
 }
 
 /**
- * 
+ * sends an array of reddit posts with some seconds in between them.
+ * @param {Message} msg msg to get the channel for the message to send
  * @param {Array} posts reddit posts
  * @author by Yesid Bejarano
  */
@@ -209,4 +214,7 @@ function IsACommand (cmd,prefix) {
 	return begin === prefix && cmd.charAt(0) !== " ";
 }
 
+/**
+ * Discord login
+ */
 client.login(DISCORD);
