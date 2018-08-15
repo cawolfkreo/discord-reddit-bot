@@ -87,6 +87,9 @@ client.on("message", msg => {
 		case `${prefix}about`:
 			aboutBot(msg);
 			break;
+		case `${prefix}reddit2`:
+			redditPostByParameter(msg);
+			break;
 		default:
 			if (IsACommand(cmd, prefix)){
 				console.log(`[${utilities.dateNow()}] command not found: ${cmd + args.toString()}`);
@@ -135,6 +138,21 @@ function aboutBot(msg) {
  */
 function redditPost(msg) {
 	reddit.getTopPosts("me_irl")
+		.then(res => asyncPosts(msg, res))
+		.catch(error => {
+			console.log(`[${utilities.dateNow()}] Error: ${error}`);
+		});
+}
+
+/**
+ * Get The top posts from the subreddit given
+ * @param {Message} msg 
+ * @author by Yesid Bejarano
+ */
+function redditPostByParameter(msg) {
+	const msgArray = msg.content.split(" ");
+	const args = msgArray[1];
+	reddit.getTopPosts(args)
 		.then(res => asyncPosts(msg, res))
 		.catch(error => {
 			console.log(`[${utilities.dateNow()}] Error: ${error}`);
