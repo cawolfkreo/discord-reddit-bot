@@ -87,6 +87,10 @@ client.on("message", msg => {
 		case `${prefix}about`:
 			aboutBot(msg);
 			break;
+		case `${prefix}help`:
+		case `${prefix}h`:
+				helpBot(msg,prefix);
+				break;
 		case `${prefix}reddit2`:
 			redditPostByParameter(msg);
 			break;
@@ -129,6 +133,27 @@ function aboutBot(msg) {
 		.setFooter("The bot is happy you care about him 🤖👍");
 
 	msg.reply(aboutMsg);
+}
+
+/**
+ * Sends the help information, wich right now is the bot commands.
+ * @param {Message} message the message to reply with the information
+ * @param {String} prefix Bot prefix command
+ * @author by Camilo Zambrano
+ */
+function helpBot(message, prefix) {
+	let helpMsg = new Discord.RichEmbed()
+		.setTitle("Help:")
+		.setDescription("commands for the bot")
+		.setColor("#3174e0")
+		.setThumbnail(client.user.displayAvatarURL)
+		.addField(`${prefix}ping`, "pong!")
+		.addField(`${prefix}about`, "info about this bot")
+		.addField(`${prefix}help`,"This very message 😜")
+		.addField(`${prefix}reddit`,"still in Beta. Gets last hour top posts from r/me_irl")
+		.setFooter("The bot wishes you to enjoy using this commands 🤖👍");
+
+	message.channel.send(helpMsg);
 }
 
 /**
