@@ -4,11 +4,11 @@
 <details><summary>Expand to see contents</summary>
   <p>
 
-* **[Description](#Description)**<br />
+* **[Description](#description)**<br />
 * **[Motivation](#motivation)**<br />
 * **[Getting Started](#getting-started)**<br />
 * **[Deployment](#deployment)**<br />
-* **[Author](#author)**<br />
+* **[Authors](#main-authors)**<br />
 * **[Contributing](#contributing)**<br />
 * **[License](#license)**<br />
 
