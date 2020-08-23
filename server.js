@@ -172,7 +172,7 @@ function helpBot(message, prefix) {
 		.addField(`${prefix}reddit`, "still in Beta. Gets last hour top posts from r/me_irl (admin only).")
 		.addField(`${prefix}reddit2 <subreddit>`, "still in Beta. Gets the top posts from the <subreddit> you supply (admin only).")
 		.addField(`${prefix}setup`, "still in Beta. Starts bot configuration dialog (admin only).")
-		.setFooter("The bot wishes you to enjoy using this commands 🤖👍");
+		.setFooter("The bot wishes you to enjoy using his commands 🤖👍");
 
 	message.channel.send(helpMsg);
 }
